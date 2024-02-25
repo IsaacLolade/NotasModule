@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="notas.list">
+      <field name="name">notas list</field>
+      <field name="model">notas.notas</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="tema"/>
+          <field name="categoria"/>
+          <field name="etiqueta"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="notas.action_window">
+      <field name="name">Panel de notas</field>
+      <field name="res_model">notas.notas</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="notas.action_server">
+      <field name="name">notas server</field>
+      <field name="model_id" ref="model_notas_notas"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-
+
+    <!-- Top menu item -->
+
+    <menuitem name="notas" id="notas.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Menú principal" id="notas.menu_1" parent="notas.menu_root"/>
+   
+
+    <!-- actions -->
+
+    <menuitem name="List" id="notas.menu_1_list" parent="notas.menu_1"
+              action="notas.action_window"/>
+    
+
+  </data>
+</odoo>
